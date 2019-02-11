@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-__author__ = 'gzp'
-
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -14,13 +10,12 @@ class Solution:
         :type head: ListNode
         :rtype: ListNode
         """
-        p, rev = head, None
+        node, last = head, None
 
-        while p:
-            rev, rev.next, p = p, rev, p.next
+        while node:
+            last, last.next, node = node, last, node.next
 
-        return rev
-
+        return last
 
 
 
