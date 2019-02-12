@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 __author__ = 'gzp'
 
-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
+from utils import Tree
+
 
 class Solution:
     def binaryTreePaths(self, root):
@@ -35,5 +37,7 @@ class Solution:
         return res
 
 
-
-
+if __name__ == '__main__':
+    s = Solution()
+    root = Tree("[1,2,3,null,5]")
+    print(s.binaryTreePaths(root))
