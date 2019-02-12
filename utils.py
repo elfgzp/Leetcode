@@ -59,12 +59,19 @@ class Tree:
             tmp = []
             for node in tree_nodes:
                 val = cls._get_first_node(nodes)
+                if val is None:
+                    continue
+
                 if val is False:
                     break
 
                 node.left = TreeNode(val)
 
                 val = cls._get_first_node(nodes)
+
+                if val is None:
+                    continue
+
                 if val is False:
                     break
 
