@@ -55,27 +55,22 @@ class Tree:
     def _tree(cls, root, nodes):
         tree_nodes = [root]
 
-        while nodes:
+        while nodes and tree_nodes:
             tmp = []
             for node in tree_nodes:
                 val = cls._get_first_node(nodes)
-                if val is None:
-                    continue
-
-                if val is False:
-                    break
-
-                node.left = TreeNode(val)
+                if val is not None:
+                    node.left = TreeNode(val)
+                else:
+                    node.left = None
 
                 val = cls._get_first_node(nodes)
 
-                if val is None:
-                    continue
+                if val is not None:
+                    node.right = TreeNode(val)
+                else:
+                    node.right = None
 
-                if val is False:
-                    break
-
-                node.right = TreeNode(val)
                 tmp.append(node.left)
                 tmp.append(node.right)
 
