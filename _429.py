@@ -22,19 +22,19 @@ class Solution:
         if not root:
             return []
 
-        next_stack = [root]
+        next_inn = [root]
         res = []
         tmp_res = [root.val]
 
-        while next_stack:
-            stack = deepcopy(next_stack)
-            next_stack = []
+        while next_inn:
+            inn = deepcopy(next_inn)
+            next_inn = []
             res.append(tmp_res)
             tmp_res = []
-            while stack:
-                first = stack.pop(0)
+            while inn:
+                first = inn.pop(0)
                 for child in first.children:
-                    next_stack.append(child)
+                    next_inn.append(child)
                     tmp_res.append(child.val)
 
         return res

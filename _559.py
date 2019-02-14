@@ -45,16 +45,16 @@ class Solution(object):
         if not root:
             return 0
 
-        stack = root.children
+        inn = root.children
         depth = 1
-        while stack:
+        while inn:
             depth += 1
             tmp = []
-            for node in stack:
+            for node in inn:
                 if node.children:
                     tmp += node.children
 
-            stack = tmp
+            inn = tmp
 
         return depth
 

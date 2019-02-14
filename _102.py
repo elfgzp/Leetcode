@@ -22,23 +22,23 @@ class Solution:
         if not root:
             return []
 
-        next_stack = [root]
+        next_inn = [root]
         res = []
         tmp_res = [root.val]
 
-        while next_stack:
-            stack = deepcopy(next_stack)
-            next_stack = []
+        while next_inn:
+            inn = deepcopy(next_inn)
+            next_inn = []
             res.append(tmp_res)
             tmp_res = []
-            while stack:
-                first = stack.pop(0)
+            while inn:
+                first = inn.pop(0)
                 if first.left and first.left.val is not None:
-                    next_stack.append(first.left)
+                    next_inn.append(first.left)
                     tmp_res.append(first.left.val)
 
                 if first.right and first.right.val is not None:
-                    next_stack.append(first.right)
+                    next_inn.append(first.right)
                     tmp_res.append(first.right.val)
 
         return res

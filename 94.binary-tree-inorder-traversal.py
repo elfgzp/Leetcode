@@ -73,25 +73,25 @@ class Solution:
         """
 
         vals = []
-        stack = [root]
+        inn = [root]
 
         history = set()
-        while stack:
-            node = stack.pop(-1)
+        while inn:
+            node = inn.pop(-1)
 
             if not node:
                 continue
 
             if node.left and node.left not in history:
-                stack.append(node)
-                stack.append(node.left)
+                inn.append(node)
+                inn.append(node.left)
                 history.add(node.left)
                 continue
             
             vals.append(node.val)
 
             if node.right and node.right not in history:
-                stack.append(node.right)
+                inn.append(node.right)
                 history.add(node.right)
                 continue
         
