@@ -72,6 +72,7 @@ class Solution1:
 
         return self._isValidBST(root.left, min_node, root) and self._isValidBST(root.right, root, max_node)
 
+
 class Solution:
     def isValidBST(self, root):
         """
@@ -93,7 +94,7 @@ class Solution:
                 inn.append(node.left)
                 history.add(node.left)
                 continue
-            
+
             last, cur = cur, node.val
 
             if last is not None and cur is not None and last >= cur:
