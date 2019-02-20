@@ -1,2 +1,2 @@
 # leetCode
-⌨️我的 leetCode python 解题答案
+⌨️我的 Leetcode python 解题答案
