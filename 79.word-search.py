@@ -53,28 +53,30 @@ class Solution:
         self.w = len(board[0])
         self.board = board
 
-        visited = [[False] * self.w for _ in range(self.h)]
         for i in range(self.h):
             for j in range(self.w):
-                if self._exist(word, 0, i, j, visited):
+                if self._exist(word, 0, i, j):
                     return True
 
         return False
 
-    def _exist(self, word, word_index, x, y, visited):
+    def _exist(self, word, word_index, x, y):
 
         if word_index + 1 == len(word):
             return self.board[x][y] == word[word_index]
 
         if self.board[x][y] == word[word_index]:
-            visited[x][y] = True
             for d_x, d_y in self.direction:
                 _x = x + d_x
                 _y = y + d_y
-                if self._inrange(_x, _y) and not visited[_x][_y] and self._exist(word, word_index + 1, _x, _y, visited):
+
+                tmp = self.board[x][y]
+                self.board[x][y] = '#'
+
+                if self._inrange(_x, _y) and self._exist(word, word_index + 1, _x, _y):
                     return True
 
-            visited[x][y] = False
+                self.board[x][y] = tmp
 
         return False
 
