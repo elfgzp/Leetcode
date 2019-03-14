@@ -65,7 +65,7 @@ class Solution1:
         return False
 
 
-class Solution:
+class Solution2:
     def isSymmetric(self, root):
         """
         :type root: TreeNode
@@ -95,3 +95,47 @@ class Solution:
         else:
             return True
 
+
+class Solution3:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+
+        return self._is_mirror(root.left, root.right)
+
+    def _is_mirror(self, left: TreeNode, right: TreeNode) -> bool:
+        if left is None or right is None:
+            return left == right
+
+        return left.val == right.val and self._is_mirror(left.left, right.right) and self._is_mirror(right.left, left.right)
+
+
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+
+        inn = []
+        next_inn = [(root.left, root.right)]
+
+        while inn or next_inn:
+            inn = next_inn
+            next_inn = []
+            while inn:
+                left, right = inn.pop(-1)
+
+                if left is None and right is not None:
+                    return False
+
+                if left is not None and right is None:
+                    return False
+
+                if left is None and right is None:
+                    continue
+
+                if left.val != right.val:
+                    return False
+
+                next_inn.extend([(left.left, right.right), (right.left, left.right)])
+
+        return True
