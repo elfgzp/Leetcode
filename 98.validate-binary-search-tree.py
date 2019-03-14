@@ -73,7 +73,7 @@ class Solution1:
         return self._isValidBST(root.left, min_node, root) and self._isValidBST(root.right, root, max_node)
 
 
-class Solution:
+class Solution2:
     def isValidBST(self, root):
         """
         :type root: TreeNode
@@ -106,3 +106,61 @@ class Solution:
                 continue
 
         return True
+
+
+class Solution3(object):
+    def isValidBST(self, root):
+        inorder = self._inorder(root)
+        return inorder == sorted(set(inorder), key=lambda x: x)
+
+    def _inorder(self, root):
+        inorder = []
+        history = set()
+        inn = []
+
+        while root:
+            while root.left and root.left not in history:
+                inn.append(root)
+                root = root.left
+
+            inorder.append(root.val)
+            history.add(root)
+
+            if root.right and root.right not in history:
+                root = root.right
+            elif inn:
+                root = inn.pop(-1)
+            else:
+                root = None
+
+        return inorder
+
+
+class Solution(object):
+    def isValidBST(self, root):
+        return self._isValidBST(root, None, None)
+
+    def _isValidBST(self, root, min_val, max_val):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+
+        if min_val is not None and root.val <= min_val:
+            return False
+
+        if max_val is not None and root.val >= max_val:
+            return False
+
+        if not root.left and not root.right:
+            return True
+
+        if not root.left:
+            return self._isValidBST(root.right, root.val, max_val)
+
+        if not root.right:
+            return self._isValidBST(root.left, min_val, root.val)
+
+        return self._isValidBST(root.right, root.val, max_val) and self._isValidBST(root.left, min_val, root.val)
