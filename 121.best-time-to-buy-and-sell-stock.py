@@ -36,6 +36,7 @@
 
 
 class Solution1:
+
     def maxProfit(self, prices):
         """
         :type prices: List[int]
@@ -57,7 +58,8 @@ class Solution1:
         return max(dp)
 
 
-class Solution:
+class Solution2:
+
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:
             return 0
@@ -70,4 +72,18 @@ class Solution:
             min_price = min(prices[i], min_price)
 
         return dp[-1]
+
+
+class Solution:
+
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+
+        res, min_price = 0, prices[0]
+        for p in prices:
+            res, min_price = max(res, p - min_price), min(p, min_price)
+
+        return res
+
 
