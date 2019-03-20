@@ -38,7 +38,7 @@
 #
 
 
-class Solution:
+class Solution1:
 
     def climbStairs(self, n):
         """
@@ -50,4 +50,17 @@ class Solution:
         for i in range(2, n + 1):
             dp.append(dp[i - 1] + dp[i - 2])
         return dp[-1]
+
+class Solution:
+    
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        pre1, pre2 = 1, 1
+
+        for i in range(2, n + 1):
+            pre1, pre2 = pre2, pre1 + pre2
+        return pre2
 
