@@ -29,30 +29,26 @@
 #
 
 
+
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         len_s = len(s)
-
-        dp = [[False for _ in range(len_s)] for _ in range(len_s)]
-
-        end = 0
-        start = 0
-
-        for j in range(len_s):
-            for i in range(0, j + 1):
-                if j - i <= 1:
+        dp = [[0 for _ in range(len_s)] for _ in range(len_s)]
+        
+        l, r = 0, 0
+        
+        for i in range(len_s):
+            for j in range(i + 1):
+                dis = i - j
+                if dis <= 2:
                     if s[i] == s[j]:
-                        dp[i][j] = True
-                        if j - i + 1 >= end - start + 1:
-                            start, end = i, j
-                else:
-                    if s[i] == s[j] and dp[i + 1][j - 1]:
-                        dp[i][j] = True
-                        if j - i + 1 >= end - start + 1:
-                            start, end = i, j
-
-        return s[start: end + 1]
-
-
-
-
+                        dp[j][i] = 1
+                        if dis > r - l:
+                            l, r = j, i
+                elif s[i] == s[j] and dp[j + 1][i - 1]:
+                    dp[j][i] = 1
+                    if dis > r - l:
+                        l, r = j, i
+                        
+        return s[l: r + 1]
+                    
