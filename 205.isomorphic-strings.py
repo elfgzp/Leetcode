@@ -32,7 +32,7 @@ class Solution1(object):
             return True
 
 
-class Solution(object):
+class Solution2(object):
     def isIsomorphic(self, s, t):
         """
         这个比第一个快？为什么？
@@ -61,3 +61,19 @@ class Solution(object):
 
         else:
             return True
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        temp = {}
+        for i in range(len(s)):
+            if s[i] not in temp:
+                temp[s[i]] = t[i]
+                if len(temp.values()) != len(set(temp.values())):
+                    return False
+            if temp[s[i]] != t[i]:
+                return False
+        return True
