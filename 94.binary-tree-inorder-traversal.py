@@ -35,6 +35,37 @@
 #         self.right = None
 
 
+class Solution:
+    """
+    2019/04/25
+    """
+
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:
+            return []
+
+        stack = [root]
+        history = set()
+        res = []
+
+        while stack:
+            node = stack[-1]
+
+            if node.left and node.left not in history:
+                stack.append(node.left)
+            else:
+                if node not in history:
+                    res.append(node.val)
+                    history.add(node)
+
+                if node.right and node.right not in history:
+                    stack.append(node.right)
+                else:
+                    stack.pop(-1)
+
+        return res
+
+
 class Solution1:
     """
     递归解法
@@ -65,7 +96,7 @@ class Solution1:
         return
 
 
-class Solution:
+class Solution2:
     """
     循环解法
     """
