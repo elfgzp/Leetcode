@@ -39,6 +39,24 @@
 
 
 class Solution:
+    """
+    2019/04/26
+    """
+
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not preorder:
+            return None
+
+        root_val = preorder[0]
+        root_index = inorder.index(root_val)
+
+        root = TreeNode(root_val)
+        root.left = self.buildTree(preorder[1: root_index + 1], inorder[: root_index])
+        root.right = self.buildTree(preorder[root_index + 1:], inorder[root_index + 1:])
+        return root
+
+
+class Solution1:
     def buildTree(self, preorder, inorder):
         """
         :type preorder: List[int]
@@ -48,7 +66,7 @@ class Solution:
 
         if not preorder:
             return None
-        
+
         root = TreeNode(preorder[0])
         mid = inorder.index(root.val)
 
