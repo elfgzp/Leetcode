@@ -18,9 +18,6 @@ class Solution:
         return nums[-1]
 
     def _sub_preorder(self, root, k, nums):
-        if not root:
-            return
-
         if root.left:
             self._sub_preorder(root.left, k, nums)
 
@@ -29,4 +26,5 @@ class Solution:
 
         nums.append(root.val)
 
-        self._sub_preorder(root.right, k, nums)
+        if root.right:
+            self._sub_preorder(root.right, k, nums)
