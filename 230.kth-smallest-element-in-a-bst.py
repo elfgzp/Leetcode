@@ -11,7 +11,7 @@
 #         self.right = None
 
 
-class Solution1:
+class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         nums = []
         self._sub_preorder(root, k, nums)
