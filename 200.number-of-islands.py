@@ -40,6 +40,41 @@
 
 
 class Solution:
+    """
+    2019/04/30
+    """
+    d = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:
+            return 0
+
+        w = len(grid[0])
+        h = len(grid)
+
+        count = 0
+        for r in range(h):
+            for c in range(w):
+                if grid[r][c] == '1':
+                    stack = [(r, c, 0)]
+                    while stack:
+                        r0, c0, d = stack.pop(-1)
+                        grid[r0][c0] = 'x'
+                        while d < 4:
+                            rd, cd = self.d[d]
+                            r1, c1 = r0 + rd, c0 + cd
+
+                            d += 1
+                            if 0 <= r1 < h and 0 <= c1 < w and grid[r1][c1] == '1':
+                                stack.append((r0, c0, d))
+                                stack.append((r1, c1, 0))
+                                break
+
+                    count += 1
+        return count
+
+
+class Solution1:
     direct = [(-1, 0), (0, 1), (1, 0), (0, -1)]
     grid = []
     h = 0
@@ -63,7 +98,7 @@ class Solution:
                 if self.grid[i][j] == '1':
                     res += 1
                     self._numIslands(i, j)
-                    
+
         return res
 
     def _numIslands(self, x, y):
