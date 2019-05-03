@@ -30,6 +30,39 @@
 
 
 class Solution:
+    """
+    2019/05/03
+    """
+    nums = None
+    results = None
+
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        self.nums = nums
+        self.results = []
+        self.gen([])
+        return self.results
+
+    def gen(self, com, count=1):
+        if count > len(self.nums):
+            self.results.append(com)
+            return
+
+        for n in self.nums:
+            if n in com:
+                continue
+
+            if count > 1:
+                if count == len(com):
+                    com.pop(-1)
+
+                com.append(n)
+            else:
+                com = [n]
+
+            self.gen(com[::], count + 1)
+
+
+class Solution1:
     def permute(self, nums):
         """
         :type nums: List[int]
