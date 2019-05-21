@@ -32,6 +32,46 @@
 
 
 class Solution:
+    """
+    2019/05/21
+    """
+
+    rows = None
+    cols = None
+
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        self.rows = len(board)
+        self.cols = len(board[0])
+
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if word[0] == board[i][j] and self._exist(board, word[1:], i, j, []):
+                    return True
+
+        return False
+
+    def _exist(self, board, word, row, col, path):
+        path.append((row, col))
+        if not word:
+            return True
+
+        if row + 1 < self.rows and (row + 1, col) not in path and word[0] == board[row + 1][col] and self._exist(board, word[1:], row + 1, col, path):
+            return True
+
+        if col + 1 < self.cols and (row, col + 1) not in path and word[0] == board[row][col + 1] and self._exist(board, word[1:], row, col + 1, path):
+            return True
+
+        if row - 1 >= 0 and (row - 1, col) not in path and word[0] == board[row - 1][col] and self._exist(board, word[1:], row - 1, col, path):
+                return True
+
+        if col - 1 >= 0 and (row, col - 1) not in path and word[0] == board[row][col - 1] and self._exist(board, word[1:], row, col - 1, path):
+                return True
+
+        path.pop(-1)
+        return False
+
+
+class Solution1:
     direction = [(-1, 0), (0, 1), (1, 0), (0, -1)]
     board = []
     h = 0
