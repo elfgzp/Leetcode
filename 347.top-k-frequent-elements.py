@@ -34,7 +34,7 @@
 #
 
 
-class Solution:
+class Solution1:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         from collections import Counter
 
@@ -49,5 +49,21 @@ class Solution:
             i += 1
         return res
 
+class Solution2:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        from collections import Counter
+        c = Counter(nums)
+        return [t[0] for t in c.most_common(k)]
 
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        m = {}
+        for n in nums:
+            m[n] = m.get(n, 0) + 1
+        
+        tl = [each for each in m.items()]
+        
+        tl.sort(key=lambda x: -x[1])
+        
+        return [each[0] for each in tl[:k]]
 
