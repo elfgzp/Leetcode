@@ -33,7 +33,6 @@ class Solution(object):
         for i in range(1, n):
             dp[i][0] = 1 if obstacleGrid[i][0] != 1 and dp[i - 1][0] != 0 else 0
 
-        print(dp)
         for i in range(1, n):
             for j in range(1, m):
                 if obstacleGrid[i][j] != 1:
