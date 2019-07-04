@@ -31,8 +31,35 @@
 #
 #
 
-
-class Solution(object):
+class Solution:
+    cache = {}
+    def generate(self, numRows: int) -> List[List[int]]:
+        
+        ans = []
+        for row in range(numRows):
+            each = []
+            for col in range(row + 1):
+                each.append(self._generate(row, col))
+            ans.append(each)
+        
+        return ans
+    
+    def _generate(self, row: int, col: int) -> int:
+        if row < 2:
+            return 1
+        
+        if col == 0:
+            return 1
+        
+        if col == row:
+            return 1
+        
+        if (row, col) not in self.cache.keys():
+            self.cache[(row, col)] = self._generate(row - 1, col - 1) + self._generate(row - 1, col)
+        
+        return self.cache[(row, col)]
+        
+class Solution1(object):
     def generate(self, numRows):
         """
         :type numRows: int
