@@ -1,3 +1,5 @@
+package Leetcode
+
 import "sort"
 
 func singleNumber(nums []int) int {
